@@ -1,5 +1,5 @@
 var authConfig = {
-    "siteName": "GoIndex", // 网站名称
+    "siteName": "Hanime", // 网站名称
     "root_pass": "index",  // 根目录密码，优先于.password
     "version" : "1.0.6", // 程序版本
     "theme" : "material", // material  classic 
@@ -18,7 +18,7 @@ var html = `
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
   <title>${authConfig.siteName}</title>
-  <script src="//cdn.jsdelivr.net/combine/gh/jquery/jquery@3.2/dist/jquery.min.js,gh/donwa/goindex@${authConfig.version}/themes/${authConfig.theme}/app.js"></script>
+  <script src="//cdn.jsdelivr.net/combine/gh/jquery/jquery@3.2/dist/jquery.min.js,gh/penjune/goindex/themes/material/app.js"></script>
 </head>
 <body>
 </body>
@@ -50,6 +50,9 @@ async function handleRequest(request) {
       return new Response(html,{status:200,headers:{'Content-Type':'text/html; charset=utf-8'}});
     }else{
       if(path.split('/').pop().toLowerCase() == ".password"){
+         return new Response("",{status:404});
+      }
+      if(path.split('/').pop().toLowerCase() == ".passwd"){
          return new Response("",{status:404});
       }
       let file = await gd.file(path);
