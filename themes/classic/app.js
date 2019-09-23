@@ -141,12 +141,13 @@ function utc2beijing(utc_datetime) {
 
 // bytes自适应转换到KB,MB,GB
 function formatFileSize(bytes) {
-    if (bytes>=1000000000) {bytes=(bytes/1000000000).toFixed(2)+' GB';}
-    else if (bytes>=1000000)    {bytes=(bytes/1000000).toFixed(2)+' MB';}
-    else if (bytes>=1000)       {bytes=(bytes/1000).toFixed(2)+' KB';}
-    else if (bytes>1)           {bytes=bytes+' bytes';}
-    else if (bytes==1)          {bytes=bytes+' byte';}
-    else                        {bytes='';}
+    if (bytes==0)                 {bytes='';}
+    else if (bytes<=1)            {bytes=bytes+' byte';}
+    else if (bytes<1000)          {bytes=bytes+' bytes';}
+    else if (bytes<1024000)       {bytes=(bytes/1024).toFixed(2)+' KB';}
+    else if (bytes<1048576000)    {bytes=(bytes/1048576).toFixed(2)+' MB';}
+    else if (bytes<1073741824000) {bytes=(bytes/1073741824).toFixed(2)+' GB';}
+    else			  {bytes=(bytes/1099511627776).toFixed(2)+' TB';}
     return bytes;
 }
 
